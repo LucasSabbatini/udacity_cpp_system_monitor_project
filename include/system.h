@@ -22,6 +22,7 @@ class System {
  private:
   Processor cpu_ = {};
   std::vector<Process> processes_ = {};
+  float current_mu = 0.;
 };
 
 #endif
