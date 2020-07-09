@@ -70,7 +70,6 @@ vector<int> LinuxParser::Pids() {
 // TODO: Read and return the system memory utilization
 float LinuxParser::MemoryUtilization() {
   float utilization;
-  float total_used_mem;
   float mem_total_int;
   float mem_free_int;
   string line;
@@ -90,14 +89,31 @@ float LinuxParser::MemoryUtilization() {
         }
       }
     }
-    total_used_mem = mem_total_int - mem_free_int;
-    utilization = total_used_mem / mem_total_int;
+    utilization = (mem_total_int - mem_free_int) / mem_total_int;
   }
   return utilization;
 }
 
 // TODO: Read and return the system uptime
-long LinuxParser::UpTime() { return 0; }
+// long int LinuxParser::UpTime() { return 10000000; }
+long int LinuxParser::UpTime() {
+  long int uptime;
+//   long int idle_time;
+  string suptime;
+  string sidle_time;
+  string line;
+  std::ifstream filestream(kProcDirectory + kUptimeFilename);
+  if (filestream.is_open()) {
+    while(std::getline(filestream, line)) {
+      std::istringstream linestream(line);
+      while (linestream >> suptime >> sidle_time) {
+//         std::cout << "Inside UpTime: " << suptime << " idle time: " << sidle_time << "\n";
+        uptime = std::stoi(suptime);
+        return uptime;
+      }
+    }
+  }
+}
 
 // TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { return 0; }
