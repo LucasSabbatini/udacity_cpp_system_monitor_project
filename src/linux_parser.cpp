@@ -129,7 +129,68 @@ long LinuxParser::ActiveJiffies() { return 0; }
 long LinuxParser::IdleJiffies() { return 0; }
 
 // TODO: Read and return CPU utilization
-vector<string> LinuxParser::CpuUtilization() { return {}; }
+// vector<string> LinuxParser::CpuUtilization() { return {}; }
+float LinuxParser::CpuUtilization() {
+  // long int jiffies = Jiffies();
+  // long int active_jiffies = ActiveJiffies();
+  // long int idle_jiffies = IdleJiffies();
+  string line;
+  
+  string cpu;
+  string user;
+  string nice;
+  string system;
+  string idle;
+  string iowait;
+  string irq;
+  string softirq;
+  string steal;
+  string guest;
+  string guest_nice;
+
+  long int user_int;
+  long int nice_int;
+  long int system_int;
+  long int idle_int;
+  long int iowait_int;
+  long int irq_int;
+  long int softirq_int;
+  long int steal_int;
+  long int quest_int;
+  long int guest_nice_int;
+  
+  float total_idle;
+  float total_non_idle;
+  float total;
+  float cpu_utilization;
+
+  std::ifstream filestream(kProcDirectory + kStatFilename);
+  if (filestream.is_open()) {
+     while (std::getline(filestream, line)) {
+       std::istringstream linestream(line);
+
+       while (linestream >> cpu >> user >> nice >> system >> idle >> iowait >> irq >> softirq >> steal >> guest >> guest_nice) {
+         idle_int = std::stoi(idle);
+         iowait_int = std::stoi(iowait);
+         total_idle = idle_int + iowait_int;
+
+         user_int = std::stoi(user);
+         nice_int = std::stoi(nice);
+         system_int = std::stoi(system);
+         irq_int  = std::stoi(irq);
+         softirq_int = std::stoi(softirq);
+         steal_int = std::stoi(steal);
+         total_non_idle = user_int + nice_int + system_int + irq_int + softirq_int + steal_int;
+
+         total = total_idle + total_non_idle;
+         cpu_utilization = (total-total_idle)/total;
+         std::cout << "Cpu utilization: " << cpu_utilization << "\n";
+         return cpu_utilization;
+       }
+     } 
+  }
+
+}
 
 // TODO: Read and return the total number of processes
 int LinuxParser::TotalProcesses() {
