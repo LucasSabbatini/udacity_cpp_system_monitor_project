@@ -26,7 +26,8 @@ float Processor::Utilization() {
 
   float total = total_idle + total_non_idle;
   
-  // calculate differences from current
+  
+//   calculate differences from current
   float total_diff = total  - this->current_total;
   float total_idle_diff = total_idle - this->current_total_idle;
 
