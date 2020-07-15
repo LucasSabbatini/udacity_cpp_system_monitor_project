@@ -19,8 +19,7 @@ Process::Process(int pid) : _pid(pid) {
 // TODO: Return this process's CPU utilization
 float Process::CpuUtilization() { return 0; }
 
-// TODO: Return this process's memory utilization
-string Process::Ram() { return string(); }
+string Process::Ram() { return LinuxParser::Ram(_pid); }
 
 // TODO: Return the age of this process (in seconds)
 long int Process::UpTime() { return 0; }
