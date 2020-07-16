@@ -10,7 +10,7 @@
 class System {
  public:
   Processor& Cpu() { return _cpu; }
-  std::vector<Process>& Processes() { return _processes; }
+  std::vector<Process>& Processes();
   float MemoryUtilization();
   long UpTime();
   int TotalProcesses();

@@ -302,9 +302,6 @@ long LinuxParser::UpTime(int pid) {
   return 0;
 }
 
-
-
-
 vector<string> LinuxParser::ParseStat(int pid) {
   string line;
   string value;
@@ -335,7 +332,6 @@ vector<string> LinuxParser::ParseStat(int pid) {
       }
     }
   }
-//   std::cout << "String vector: " << words.size() << "\n";
   return words;
 }
 

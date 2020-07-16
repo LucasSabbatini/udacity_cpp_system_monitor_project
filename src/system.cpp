@@ -3,6 +3,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 #include "process.h"
 #include "processor.h"
@@ -23,15 +24,17 @@ System::System() {
   _kernel  = LinuxParser::Kernel();
 }
 
+std::vector<Process>& System::Processes() {
+  std:sort(_processes.begin(), _processes.end(),  [](Process& a, Process& b) {
+    return a < b;
+  });
+  return _processes;
+}
 
-// TODO: Return the system's memory utilization
 float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(); }
 
-// TODO: Return the number of processes actively running on the system
 int System::RunningProcesses() { LinuxParser::RunningProcesses(); }
 
-// TODO: Return the total number of processes on the system
 int System::TotalProcesses() { LinuxParser::TotalProcesses(); }
 
-// TODO: Return the number of seconds since the system started running
 long int System::UpTime() { return LinuxParser::UpTime(); }
