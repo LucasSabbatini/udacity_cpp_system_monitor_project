@@ -109,20 +109,8 @@ long int LinuxParser::UpTime() {
       }
     }
   }
+  return 0;
 }
-
-// TODO: Read and return the number of jiffies for the system
-long LinuxParser::Jiffies() { return 0; }
-
-// TODO: Read and return the number of active jiffies for a PID
-// REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) { return 0; }
-
-// TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies() { return 0; }
-
-// TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies() { return 0; }
 
 vector<string> LinuxParser::CpuUtilization() {
   string line;
@@ -160,6 +148,7 @@ vector<string> LinuxParser::CpuUtilization() {
        }
      } 
   }
+  return cpu_info;
 }
 
 int LinuxParser::TotalProcesses() {
@@ -214,6 +203,7 @@ string LinuxParser::Command(int pid) {
       return command;
     }
   }
+  return string();
 }
 
 string LinuxParser::Ram(int pid) { 
@@ -238,6 +228,7 @@ string LinuxParser::Ram(int pid) {
       }
     }
   }
+  return string();
 }
 
 string LinuxParser::Uid(int pid) { 
@@ -255,6 +246,7 @@ string LinuxParser::Uid(int pid) {
       }
     }
   }
+  return string();
  }
 
 string LinuxParser::User(int pid) { 
@@ -277,6 +269,7 @@ string LinuxParser::User(int pid) {
       }
     }
   }
+  return string();
 }
 
 long LinuxParser::UpTime(int pid) { 
