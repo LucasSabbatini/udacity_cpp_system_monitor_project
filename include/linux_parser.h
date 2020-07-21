@@ -7,7 +7,6 @@
 
 namespace LinuxParser {
 // Paths
-const int clock_hz = 100;
 const std::string kProcDirectory{"/proc/"};
 const std::string kCmdlineFilename{"/cmdline"};
 const std::string kCpuinfoFilename{"/cpuinfo"};

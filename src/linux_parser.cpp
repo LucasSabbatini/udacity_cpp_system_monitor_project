@@ -285,7 +285,7 @@ long LinuxParser::UpTime(int pid) {
       while (linestream >> value) {
         if (counter == 22) {
           long starttime = std::stoi(value);
-          long puptime = starttime/clock_hz;
+          long puptime = starttime/sysconf(_SC_CLK_TCK);
           return system_uptime - puptime;
         }
         counter++;

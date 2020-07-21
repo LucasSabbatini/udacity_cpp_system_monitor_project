@@ -18,8 +18,6 @@ float Processor::Utilization() {
   long int irq_int = std::stoi(cpu_info[5]);
   long int softirq_int = std::stoi(cpu_info[6]);
   long int steal_int = std::stoi(cpu_info[7]);
-  long int quest_int = std::stoi(cpu_info[8]);
-  long int guest_nice_int = std::stoi(cpu_info[9]);
 
   float total_idle = idle_int + iowait_int;
   float total_non_idle = user_int + nice_int + system_int + irq_int + softirq_int + steal_int;

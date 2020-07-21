@@ -25,7 +25,7 @@ System::System() {
 }
 
 std::vector<Process>& System::Processes() {
-  std:sort(_processes.begin(), _processes.end(),  [](Process& a, Process& b) {
+  std::sort(_processes.begin(), _processes.end(),  [](Process& a, Process& b) {
     return a < b;
   });
   return _processes;
@@ -33,8 +33,8 @@ std::vector<Process>& System::Processes() {
 
 float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(); }
 
-int System::RunningProcesses() { LinuxParser::RunningProcesses(); }
+int System::RunningProcesses() { return LinuxParser::RunningProcesses(); }
 
-int System::TotalProcesses() { LinuxParser::TotalProcesses(); }
+int System::TotalProcesses() { return LinuxParser::TotalProcesses(); }
 
 long int System::UpTime() { return LinuxParser::UpTime(); }

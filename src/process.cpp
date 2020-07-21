@@ -22,15 +22,11 @@ float Process::CpuUtilization() {
   vector<string> stat_data = LinuxParser::ParseStat(_pid);
   int utime = std::stoi(stat_data[0]);
   int stime = std::stoi(stat_data[1]);
-  int cutime = std::stoi(stat_data[2]);
-  int cstime = std::stoi(stat_data[3]);
   int starttime = std::stoi(stat_data[4]);
-
-  float total_time = utime + stime + cutime + cstime;
-  long int process_uptime = uptime - (starttime/LinuxParser::clock_hz);
-  float cpu_utilization = 100 * ((total_time/LinuxParser::clock_hz)/process_uptime);
+  float total_time = utime + stime;
+  long int process_uptime = uptime - (starttime/sysconf(_SC_CLK_TCK)); // total time (active+ idle)
+  float cpu_utilization = 100 * ((total_time/sysconf(_SC_CLK_TCK))/process_uptime);
   return cpu_utilization;
-
 }
 
 string Process::Ram() { return LinuxParser::Ram(_pid); }
